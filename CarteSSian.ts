@@ -1,32 +1,96 @@
-$(document).ready( function()
-{
- 
+$(document).ready(function () {
 
-let list: any[] = [{'background-color':'black'}];
-
-list.push({'color':'blue'});
-
-
-
-
-let body = 'body';
+  function compare(a, b) {
+    if (a.property < b.property)
+      return -1;
+    if (a.property > b.property)
+      return 1;
+    return 0;
+  }
 
 
-function paramTest(element: string, x: number, y: number, cssParams: any[])
-   {
-     
-     for (let i = 0; i < Object.keys(cssParams).length; i++)
-     {
+  class cartessian {
 
-     $(element).css(cssParams[i]);
-     console.log("iterated values "+  JSON.stringify(list[i]));
-     }
+    //top to bottom coordinates using Css' top and left attributes
+    x: number;
+    y: number;
+
+    //dimension of the div that will be used to associate 
+    height: number;
+    width: number;
+
+    element: string;
+
+    properties: any[];
+
+    constructor(element: string, x: number, y: number, height?: number, width?: number) {
+
+      this.element = element;
+      this.x = x;
+      this.y = y;
+
+      this.height = height;
+      this.width = width;
 
 
-   }
+
+    }
+
+    addCss(cssvalues: any[]) {
+      
+      cssvalues.sort(compare);
+
+      for (let i = 0; Object.keys(cssvalues).length < i; i++) {
+      
+        cssvalues[i].id = i;
+
+        this.properties.push(cssvalues[i]);
+        console.log(JSON.stringify(cssvalues[i]));
+
+      }
+
+    }
+
+  }
 
 
-paramTest(body,0,0,list);
+
+  //this is the format for all the arrays, this will allow 
+  //one to search through indexes
+  var cssData: { id: number, property: string, value: string }[] = [
+    { id: 67, property: "color", value: "red" },
+    { id: 56, property: "background-color", value: "black" }
+  ];
+
+
+
+  //this is the function that will be used to sort the array entries by alphabetical order
+  //cssData.sort(compare);
+
+
+
+
+
+
+
+  $("body").css(cssData[0].property, cssData[0].value);
+  $("body").css(cssData[1].property, cssData[1].value);
+  //$("body").css({cssData[0].property, "'red'"});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
