@@ -1,1 +1,1 @@
-console.log("NIGGAS");
+console.log("candy a fag");
